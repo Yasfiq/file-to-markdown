@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 0
+- **Completed:** 1
 - **Blocked:** 0
-- **Current Active Task:** `TASK-001`
+- **Current Active Task:** `TASK-002`
 
 ---
 
@@ -19,9 +19,9 @@
 
 ### Phase A: Setup & Scaffolding
 
-#### [ ] `TASK-001`: Scaffold Vite + React + TS + Tailwind + Vitest (strict mode)
+#### [x] `TASK-001`: Scaffold Vite + React + TS + Tailwind + Vitest (strict mode)
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `package.json`, `tsconfig.json`, `vite.config.ts`, `tailwind.config.js`, `postcss.config.js`, `index.html`, `src/main.tsx`, `src/App.tsx`, `src/index.css`, `.gitignore`
   - **Justified Supporting Files:** None
@@ -30,18 +30,18 @@
   - Baca `ARCHITECTURE.md` §2 (stack) & §3 (struktur direktori).
   - Baca `RULES.md` §2.1 (strict flags) & §6 (testing).
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: `npm run dev` serve halaman tanpa error.
-  - [ ] `AC-02`: `npm run lint`, `npm run typecheck`, `npm test` semua exit 0 (script terdefinisi).
-  - [ ] `AC-03`: Strict flags aktif (`strict`, `noUncheckedIndexedAccess`).
+  - [x] `AC-01`: `npm run dev` serve halaman tanpa error.
+  - [x] `AC-02`: `npm run lint`, `npm run typecheck`, `npm test` semua exit 0 (script terdefinisi).
+  - [x] `AC-03`: Strict flags aktif (`strict`, `noUncheckedIndexedAccess`).
 - **Implementation & TDD Steps:**
-  1. [ ] `npm create vite@latest` (react-ts template).
-  2. [ ] Tambah Tailwind + Vitest + eslint config.
-  3. [ ] Buat smoke test trivial (render App).
+  1. [x] Setup config Vite + React TS + Tailwind manual.
+  2. [x] Tambah Tailwind + Vitest + eslint config (flat, typescript-eslint).
+  3. [x] Buat smoke test nyata (App export function check).
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm run lint && npm run typecheck && npm test`
   - **Evidence:** exit code 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] `git status`/`git diff`: hanya file scaffold yang berubah.
+  - [x] `git status`/`git diff`: hanya file scaffold yang berubah.
 
 ---
 
