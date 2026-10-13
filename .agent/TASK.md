@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 5
+- **Completed:** 6
 - **Blocked:** 0
-- **Current Active Task:** `TASK-006`
+- **Current Active Task:** `TASK-007`
 
 ---
 
@@ -146,9 +146,9 @@
 - **Containment Audit (Pre-Done Gate):**
   - [x] Mutasi terisolasi.
 
-#### [ ] `TASK-006`: Markdown renderer
+#### [x] `TASK-006`: Markdown renderer
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `src/lib/renderer/markdown-renderer.ts`, `tests/unit/renderer/markdown-renderer.test.ts`
   - **Justified Supporting Files:** None
@@ -156,22 +156,22 @@
 - **Pre-Conditions & Skills:**
   - Baca `TSD.md` §4.3 & `ARCHITECTURE.md` §6 (format output).
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: `# Judul` dari `Presentation.title`; `## Slide NN — Judul` per slide (NN dua digit, urut). → test
-  - [ ] `AC-02`: Bullet → `- ` dengan indent 2 spasi per level. → test
-  - [ ] `AC-03`: Tabel → GFM table (`| a | b |` + separator row). → test
-  - [ ] `AC-04`: Warning → `> ⚠️ Slide N: pesan`. → test
-  - [ ] `AC-05`: Notes → `> **Catatan pembicara:**\n> teks`. → test
-  - [ ] `AC-06`: Slide dipisah `---`. → test
-  - [ ] `AC-07`: Text passthrough tanpa transformasi angka/satuan. → test
+  - [x] `AC-01`: `# Judul` dari `Presentation.title`; `## Slide NN - Judul` per slide (NN dua digit, urut). → test
+  - [x] `AC-02`: Bullet → `- ` dengan indent 2 spasi per level. → test
+  - [x] `AC-03`: Tabel → GFM table (`| a | b |` + separator row). → test
+  - [x] `AC-04`: Warning → `> ⚠️ Slide N: pesan`. → test
+  - [x] `AC-05`: Notes → `> **Catatan pembicara:**\n> teks`. → test
+  - [x] `AC-06`: Slide dipisah `---`. → test
+  - [x] `AC-07`: Text passthrough tanpa transformasi angka/satuan. → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: 7 test (pure function, mudah dites).
-  2. [ ] GREEN: implement renderer.
-  3. [ ] REFACTOR.
+  1. [x] RED: 7 test (pure function).
+  2. [x] GREEN: implement renderer.
+  3. [x] REFACTOR: block join & table cell escaping.
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm test -- tests/unit/renderer && npm run typecheck`
   - **Evidence:** exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi terisolasi.
+  - [x] Mutasi terisolasi.
 
 ---
 
