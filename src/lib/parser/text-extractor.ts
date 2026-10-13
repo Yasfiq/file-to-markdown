@@ -1,5 +1,7 @@
 import type { ContentElement, SlideModel } from './types';
 
+import { extractTables } from './table-extractor';
+
 interface Namespaces {
   p: string;
   a: string;
@@ -38,6 +40,11 @@ export function extractSlide(
 ): SlideModel {
   const title = extractTitle(document, namespaces);
   const content: ContentElement[] = [];
+
+  // Extract tables first
+  const tables = extractTables(document, namespaces);
+  content.push(...tables);
+
   const paragraphs = elements(document, namespaces.a, 'p');
 
   for (const paragraph of paragraphs) {
@@ -46,6 +53,7 @@ export function extractSlide(
       .join('');
     if (!text) continue;
     if (ancestor(paragraph, 'sp') && elements(ancestor(paragraph, 'sp') as Element, namespaces.p, 'ph')[0]?.getAttribute('type') === 'title') continue;
+    if (ancestor(paragraph, 'tc')) continue; // Skip paragraphs inside tables (handled by table-extractor)
 
     const pPr = elements(paragraph, namespaces.a, 'pPr')[0];
     const hasBullet = pPr !== undefined && elements(pPr, namespaces.a, 'buChar').length === 1;

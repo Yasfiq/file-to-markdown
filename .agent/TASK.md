@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 3
+- **Completed:** 4
 - **Blocked:** 0
-- **Current Active Task:** `TASK-004`
+- **Current Active Task:** `TASK-005`
 
 ---
 
@@ -97,9 +97,9 @@
 - **Containment Audit (Pre-Done Gate):**
   - [x] Mutasi hanya file Primary + fixture parser.
 
-#### [ ] `TASK-004`: Table extractor (merged cells, empty cells, fidelity angka)
+#### [x] `TASK-004`: Table extractor (merged cells, empty cells, fidelity angka)
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `src/lib/parser/table-extractor.ts`, `tests/unit/parser/table-extractor.test.ts`, `tests/fixtures/` (table XML)
   - **Justified Supporting Files:** None
@@ -108,19 +108,19 @@
   - Baca `KNOWLEDGE.md` §2.2 (gridSpan/rowSpan, empty cell).
   - Baca `RULES.md` §3.1 (fidelity: angka & satuan tidak boleh berubah).
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: Tabel sederhana → `headers` + `rows` benar. → test
-  - [ ] `AC-02`: `gridSpan`/`rowSpan` → cell gabungan direpresentasikan (kosong untuk cell merge). → test
-  - [ ] `AC-03`: Cell kosong tetap `""`, tidak dihilangkan. → test
-  - [ ] `AC-04`: Fidelity: `237,6 kWp` → `237,6 kWp` persis (tanpa transformasi angka). → test
+  - [x] `AC-01`: Tabel sederhana → `headers` + `rows` benar. → test
+  - [x] `AC-02`: `gridSpan`/`rowSpan` → cell gabungan direpresentasikan (kosong untuk cell merge). → test
+  - [x] `AC-03`: Cell kosong tetap `""`, tidak dihilangkan. → test
+  - [x] `AC-04`: Fidelity: `237,6 kWp` → `237,6 kWp` persis (tanpa transformasi angka). → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: 4 test.
-  2. [ ] GREEN: implement `table-extractor.ts`.
-  3. [ ] REFACTOR.
+  1. [x] RED: 4 unit test dengan fixture OpenXML table.
+  2. [x] GREEN: implement `table-extractor.ts` dan hubungkan ke `extractSlide`.
+  3. [x] REFACTOR: gridSpan/rowSpan padding algorithm.
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm test -- tests/unit/parser/table-extractor.test.ts && npm run typecheck`
   - **Evidence:** exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi terisolasi.
+  - [x] Mutasi terisolasi.
 
 #### [ ] `TASK-005`: Notes extractor + unsupported element warnings
 
