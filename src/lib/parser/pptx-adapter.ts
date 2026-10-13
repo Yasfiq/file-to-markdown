@@ -1,6 +1,7 @@
 import JSZip from 'jszip';
 import type { Presentation, Result } from './types';
 import { extractSlide, sortSlideFilenames } from './text-extractor';
+import { extractNotes, extractUnsupportedWarnings } from './notes-extractor';
 
 /** Parse a PPTX file into normalized presentation data. */
 export async function parsePptx(file: File): Promise<Result<Presentation>> {
@@ -20,10 +21,28 @@ export async function parsePptx(file: File): Promise<Result<Presentation>> {
       const xml = await zip.file(name)?.async('string');
       if (!xml) continue;
       const document = new DOMParser().parseFromString(xml, 'application/xml');
-      slides.push(extractSlide(document, index + 1));
+      const slide = extractSlide(document, index + 1);
+
+      // Extract notes
+      const notesName = `ppt/notesSlides/notesSlide${slideNumberOf(name)}.xml`;
+      const notesXml = await zip.file(notesName)?.async('string');
+      if (notesXml) {
+        const notesDoc = new DOMParser().parseFromString(notesXml, 'application/xml');
+        slide.notes = extractNotes(notesDoc);
+      }
+
+      // Extract unsupported element warnings
+      const warnings = extractUnsupportedWarnings(document, index + 1);
+      slide.warnings.push(...warnings);
+
+      slides.push(slide);
     }
     return { success: true, data: { title: file.name.replace(/\.pptx$/i, ''), slides } };
   } catch {
     return { success: false, error: { code: 'CORRUPTED_FILE', message: 'File PPTX rusak atau tidak valid.' } };
   }
+}
+
+function slideNumberOf(filename: string): string {
+  return filename.match(/slide(\d+)\.xml$/)?.[1] ?? '';
 }

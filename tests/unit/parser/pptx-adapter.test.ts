@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import JSZip from 'jszip';
 import { parsePptx } from '../../../src/lib/parser/pptx-adapter';
 import { slideXml, titleShape, paragraph, bodyShape } from '../../fixtures/slide-xml';
+import { notesSlideXml, pictureShape } from '../../fixtures/notes-xml';
 
 function makePptxBlob(files: Record<string, string>): Promise<File> {
   const zip = new JSZip();
@@ -32,6 +33,23 @@ describe('parsePptx — AC-05 error handling & zip integration', () => {
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.error.code).toBe('NO_SLIDES');
+    }
+  });
+
+  it('loads notes and unsupported-element warnings per slide', async () => {
+    const xml = slideXml(pictureShape('Foto') + bodyShape(paragraph('Halo dunia')));
+    const file = await makePptxBlob({
+      'ppt/slides/slide1.xml': xml,
+      'ppt/notesSlides/notesSlide1.xml': notesSlideXml('Catatan presenter'),
+    });
+
+    const result = await parsePptx(file);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.slides[0]?.notes).toBe('Catatan presenter');
+      expect(result.data.slides[0]?.warnings).toEqual([
+        { slideNumber: 1, elementType: 'image', message: 'Slide 1: gambar tidak diekstrak.' },
+      ]);
     }
   });
 

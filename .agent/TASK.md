@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 4
+- **Completed:** 5
 - **Blocked:** 0
-- **Current Active Task:** `TASK-005`
+- **Current Active Task:** `TASK-006`
 
 ---
 
@@ -122,9 +122,9 @@
 - **Containment Audit (Pre-Done Gate):**
   - [x] Mutasi terisolasi.
 
-#### [ ] `TASK-005`: Notes extractor + unsupported element warnings
+#### [x] `TASK-005`: Notes extractor + unsupported element warnings
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `src/lib/parser/notes-extractor.ts`, `src/lib/parser/pptx-adapter.ts` (integrasikan warnings & notes), `tests/unit/parser/notes-extractor.test.ts`, `tests/fixtures/`
   - **Justified Supporting Files:** None
@@ -132,19 +132,19 @@
 - **Pre-Conditions & Skills:**
   - Baca `PRD.md` FR8/FR10, `RULES.md` §3.2.
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: Notes terbaca dari `notesSlide{N}.xml` → `SlideModel.notes`. → test
-  - [ ] `AC-02`: Slide tanpa notes → `notes: null`. → test
-  - [ ] `AC-03`: `<p:pic>` → warning `image`; `c:chart` → warning `chart`; dst per `UnsupportedElementType`. → test
-  - [ ] `AC-04`: Konten gagal TIDAK dianggap sukses (muncul di `warnings`, FR8). → test
+  - [x] `AC-01`: Notes terbaca dari `notesSlide{N}.xml` → `SlideModel.notes`. → test
+  - [x] `AC-02`: Slide tanpa notes → `notes: null`. → test
+  - [x] `AC-03`: `<p:pic>` → warning `image`; `c:chart` → warning `chart`; dst per `UnsupportedElementType`. → test
+  - [x] `AC-04`: Konten gagal TIDAK dianggap sukses (muncul di `warnings`, FR8). → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: 4 test.
-  2. [ ] GREEN: implement.
-  3. [ ] REFACTOR.
+  1. [x] RED: 4 test untuk notes + unsupported warnings.
+  2. [x] GREEN: implement `notes-extractor.ts` dan integrasikan ke `pptx-adapter.ts`.
+  3. [x] REFACTOR: notes filename keying by slide number.
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm test -- tests/unit/parser && npm run typecheck`
   - **Evidence:** exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi terisolasi.
+  - [x] Mutasi terisolasi.
 
 #### [ ] `TASK-006`: Markdown renderer
 
