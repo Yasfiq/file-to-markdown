@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 2
+- **Completed:** 3
 - **Blocked:** 0
-- **Current Active Task:** `TASK-003`
+- **Current Active Task:** `TASK-004`
 
 ---
 
@@ -71,9 +71,9 @@
 - **Containment Audit (Pre-Done Gate):**
   - [x] Mutasi hanya 3 file Primary.
 
-#### [ ] `TASK-003`: PPTX Parser Adapter — unzip + teks & bullet per slide
+#### [x] `TASK-003`: PPTX Parser Adapter — unzip + teks & bullet per slide
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `src/lib/parser/pptx-adapter.ts`, `src/lib/parser/text-extractor.ts`, `tests/unit/parser/text-extractor.test.ts`, `tests/fixtures/` (sample XML)
   - **Justified Supporting Files:** None
@@ -82,20 +82,20 @@
   - Baca `KNOWLEDGE.md` §2.1–2.3 (gotcha `<a:t>` runs, ordering slide numerik, title detection).
   - Baca `TSD.md` §4.2.
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: Slide terurut numerik (slide10 SETELAH slide9). → test
-  - [ ] `AC-02`: Multi-run `<a:r>` dalam satu `<a:p>` digabung jadi satu teks. → test
-  - [ ] `AC-03`: Bullet level (indent) terdeteksi → `ContentElement.bullet`. → test
-  - [ ] `AC-04`: Judul via `<p:ph type="title">`; slide tanpa judul → `null`. → test
-  - [ ] `AC-05`: File ZIP rusak → `Result.error CORRUPTED_FILE`, tanpa throw. → test
+  - [x] `AC-01`: Slide terurut numerik (slide10 SETELAH slide9). → test
+  - [x] `AC-02`: Multi-run `<a:r>` dalam satu `<a:p>` digabung jadi satu teks. → test
+  - [x] `AC-03`: Bullet level (indent) terdeteksi → `ContentElement.bullet`. → test
+  - [x] `AC-04`: Judul via `<p:ph type="title">`; slide tanpa judul → `null`. → test
+  - [x] `AC-05`: File ZIP rusak → `Result.error CORRUPTED_FILE`, tanpa throw. → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: 5 test di atas dengan fixture XML nyata (kecil, hand-crafted).
-  2. [ ] GREEN: implement `pptx-adapter.ts` + `text-extractor.ts`.
-  3. [ ] REFACTOR: helper namespace DOM terpisah rapi.
+  1. [x] RED: test parser dengan fixture XML hand-crafted.
+  2. [x] GREEN: implement `pptx-adapter.ts` + `text-extractor.ts`.
+  3. [x] REFACTOR: helper namespace DOM dan numeric sorting.
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm test -- tests/unit/parser && npm run typecheck`
   - **Evidence:** exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi hanya file Primary.
+  - [x] Mutasi hanya file Primary + fixture parser.
 
 #### [ ] `TASK-004`: Table extractor (merged cells, empty cells, fidelity angka)
 

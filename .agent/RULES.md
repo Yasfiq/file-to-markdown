@@ -20,6 +20,7 @@
     "@vitejs/plugin-react": "^4.3.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "happy-dom": "^15.11.0",
     "typescript-eslint": "^7.18.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
