@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 1
+- **Completed:** 2
 - **Blocked:** 0
-- **Current Active Task:** `TASK-002`
+- **Current Active Task:** `TASK-003`
 
 ---
 
@@ -47,9 +47,9 @@
 
 ### Phase B: Core Logic (Parser & Renderer)
 
-#### [ ] `TASK-002`: Normalized Slide Model + Validator file
+#### [x] `TASK-002`: Normalized Slide Model + Validator file
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `src/lib/parser/types.ts`, `src/lib/validator/file-validator.ts`, `tests/unit/validator.test.ts`
   - **Justified Supporting Files:** None
@@ -58,18 +58,18 @@
   - Baca `TSD.md` §3.2 (schemas) & §4.1.
   - Baca `RULES.md` §2.3 (Result pattern), §4.1 (validation gates).
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: File `.pptx` valid → `Result.success`. → `tests/unit/validator.test.ts`
-  - [ ] `AC-02`: Ekstensi/MIME salah → `INVALID_TYPE` dengan pesan jelas. → test
-  - [ ] `AC-03`: File > 25MB → `FILE_TOO_LARGE`. → test
+  - [x] `AC-01`: File `.pptx` valid → `Result.success`. → `tests/unit/validator.test.ts`
+  - [x] `AC-02`: Ekstensi/MIME salah → `INVALID_TYPE` dengan pesan jelas. → test
+  - [x] `AC-03`: File > 25MB → `FILE_TOO_LARGE`. → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: test 3 skenario di atas.
-  2. [ ] GREEN: implement `file-validator.ts` + tipe di `types.ts`.
-  3. [ ] REFACTOR: cek anti-slop.
+  1. [x] RED: test 4 skenario validasi.
+  2. [x] GREEN: implement `file-validator.ts` + tipe di `types.ts`.
+  3. [x] REFACTOR: cek anti-slop.
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm test -- tests/unit/validator.test.ts && npm run typecheck`
   - **Evidence:** exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi hanya 3 file Primary.
+  - [x] Mutasi hanya 3 file Primary.
 
 #### [ ] `TASK-003`: PPTX Parser Adapter — unzip + teks & bullet per slide
 
