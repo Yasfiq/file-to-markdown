@@ -1,5 +1,6 @@
 import { ExportButtons } from './components/ExportButtons';
 import { FileUpload } from './components/FileUpload';
+import { LimitationsSection } from './components/LimitationsSection';
 import { PreviewPane } from './components/PreviewPane';
 import { WarningList } from './components/WarningList';
 import { useFileProcessor } from './hooks/useFileProcessor';
@@ -32,6 +33,7 @@ export default function App() {
             <WarningList warnings={processor.warnings} />
           </>
         )}
+        <LimitationsSection />
       </section>
     </main>
   );
