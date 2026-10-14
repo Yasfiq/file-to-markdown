@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 6
+- **Completed:** 7
 - **Blocked:** 0
-- **Current Active Task:** `TASK-007`
+- **Current Active Task:** `TASK-008`
 
 ---
 
@@ -177,9 +177,9 @@
 
 ### Phase C: UI Layer
 
-#### [ ] `TASK-007`: FileUpload + pipeline hook (state machine)
+#### [x] `TASK-007`: FileUpload + pipeline hook (state machine)
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `src/components/FileUpload.tsx`, `src/hooks/useFileProcessor.ts`, `tests/unit/useFileProcessor.test.ts`
   - **Justified Supporting Files:** `src/App.tsx` (render upload)
@@ -187,18 +187,18 @@
 - **Pre-Conditions & Skills:**
   - Baca `TSD.md` §4.4, `RULES.md` §7 (a11y, pesan error user-facing).
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: Dropzone + click-to-browse, keyboard accessible (ARIA). → test
-  - [ ] `AC-02`: File invalid → pesan error jelas (bukan jargon). → test
-  - [ ] `AC-03`: State machine `idle→processing→success|error` benar. → test
+  - [x] `AC-01`: Dropzone + click-to-browse, keyboard accessible (ARIA). → test
+  - [x] `AC-02`: File invalid → pesan error jelas (bukan jargon). → test
+  - [x] `AC-03`: State machine `idle→processing→success|error` benar. → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: test hook + komponen.
-  2. [ ] GREEN: implement.
-  3. [ ] REFACTOR.
+  1. [x] RED: test hook + komponen.
+  2. [x] GREEN: implement.
+  3. [x] REFACTOR.
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm test -- tests/unit/useFileProcessor.test.ts && npm run typecheck && npm run lint`
-  - **Evidence:** exit 0.
+  - **Evidence:** `npm test` (39 passed), `npm run typecheck`, `npm run lint`, `npm run build` exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi terisolasi.
+  - [x] Mutasi terisolasi (`.agent/RULES.md`, package files, `src/App.tsx`, `src/components/FileUpload.tsx`, `src/hooks/useFileProcessor.ts`, fixture and tests).
 
 #### [ ] `TASK-008`: PreviewPane + WarningList
 
