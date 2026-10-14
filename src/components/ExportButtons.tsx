@@ -7,14 +7,17 @@ interface ExportButtonsProps {
 
 export function ExportButtons({ markdown, fileName }: ExportButtonsProps) {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
   const handleCopy = async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(markdown);
+      setCopyFailed(false);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // ponytail: fallback if clipboard permissions fail in certain browsers
+      setCopied(false);
+      setCopyFailed(true);
     }
   };
 
@@ -39,6 +42,11 @@ export function ExportButtons({ markdown, fileName }: ExportButtonsProps) {
       >
         {copied ? 'Tersalin' : 'Salin Markdown'}
       </button>
+      {copyFailed && (
+        <p role="alert" className="text-sm text-red-800">
+          Gagal menyalin ke clipboard. Pilih teks di preview lalu salin manual, atau gunakan Unduh .md.
+        </p>
+      )}
 
       <button
         type="button"

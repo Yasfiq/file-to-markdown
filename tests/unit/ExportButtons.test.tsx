@@ -31,6 +31,21 @@ describe('ExportButtons', () => {
     });
   });
 
+  it('shows error feedback when clipboard write fails', async () => {
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText: vi.fn().mockRejectedValue(new Error('denied')) },
+      configurable: true,
+      writable: true,
+    });
+
+    render(<ExportButtons markdown={markdown} fileName={fileName} />);
+    fireEvent.click(screen.getByRole('button', { name: /salin markdown/i }));
+
+    const alert = await screen.findByRole('alert');
+    expect(alert.textContent).toContain('Gagal menyalin');
+    expect(screen.queryByRole('button', { name: /tersalin/i })).toBeNull();
+  });
+
   it('triggers markdown file download with .md extension (AC-02)', () => {
     const createObjectURLMock = vi.fn().mockReturnValue('blob:test-url');
     const revokeObjectURLMock = vi.fn();
