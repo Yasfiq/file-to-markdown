@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 8
+- **Completed:** 9
 - **Blocked:** 0
-- **Current Active Task:** `TASK-009`
+- **Current Active Task:** `TASK-010`
 
 ---
 
@@ -223,27 +223,27 @@
 - **Containment Audit (Pre-Done Gate):**
   - [x] Mutasi terisolasi.
 
-#### [ ] `TASK-009`: Copy & Download (.md)
+#### [x] `TASK-009`: Copy & Download (.md)
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
-  - **Primary Affected Files:** `src/components/ExportButtons.tsx`, `src/hooks/useClipboard.ts`, `tests/unit/export.test.ts`
-  - **Justified Supporting Files:** `src/App.tsx`
+  - **Primary Affected Files:** `src/components/ExportButtons.tsx`, `tests/unit/ExportButtons.test.tsx`
+  - **Justified Supporting Files:** `src/App.tsx`, `src/hooks/useFileProcessor.ts` (nama file asli untuk output `.md`).
 - **Dependencies:** `TASK-008`
 - **Pre-Conditions & Skills:**
   - Baca `RULES.md` §7 (semantics: `<button>`).
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: Copy → `navigator.clipboard.writeText` terpanggil; feedback "Tersalin". → test
-  - [ ] `AC-02`: Download → Blob `text/markdown` + filename `{namafile}.md`. → test
+  - [x] `AC-01`: Copy → `navigator.clipboard.writeText` terpanggil; feedback "Tersalin". → test
+  - [x] `AC-02`: Download → Blob `text/markdown` + filename `{namafile}.md`. → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: 2 test.
-  2. [ ] GREEN: implement.
-  3. [ ] REFACTOR.
+  1. [x] RED: 2 test.
+  2. [x] GREEN: implement.
+  3. [x] REFACTOR.
 - **Verification Gates (Deterministic Proof):**
-  - **Command:** `npm test -- tests/unit/export.test.ts && npm run typecheck`
-  - **Evidence:** exit 0.
+  - **Command:** `npm test -- tests/unit/ExportButtons.test.tsx && npm run typecheck`
+  - **Evidence:** `npm test` (46 passed), lint, typecheck, build exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi terisolasi.
+  - [x] Mutasi terisolasi.
 
 ---
 

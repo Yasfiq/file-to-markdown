@@ -1,3 +1,4 @@
+import { ExportButtons } from './components/ExportButtons';
 import { FileUpload } from './components/FileUpload';
 import { PreviewPane } from './components/PreviewPane';
 import { WarningList } from './components/WarningList';
@@ -26,6 +27,7 @@ export default function App() {
         )}
         {processor.status === 'success' && processor.markdown && (
           <>
+            <ExportButtons markdown={processor.markdown} fileName={processor.fileName} />
             <PreviewPane markdown={processor.markdown} />
             <WarningList warnings={processor.warnings} />
           </>
