@@ -9,9 +9,9 @@
 ## 📊 Summary Progress
 
 - **Total Tasks:** 10
-- **Completed:** 7
+- **Completed:** 8
 - **Blocked:** 0
-- **Current Active Task:** `TASK-008`
+- **Current Active Task:** `TASK-009`
 
 ---
 
@@ -200,28 +200,28 @@
 - **Containment Audit (Pre-Done Gate):**
   - [x] Mutasi terisolasi (`.agent/RULES.md`, package files, `src/App.tsx`, `src/components/FileUpload.tsx`, `src/hooks/useFileProcessor.ts`, fixture and tests).
 
-#### [ ] `TASK-008`: PreviewPane + WarningList
+#### [x] `TASK-008`: PreviewPane + WarningList
 
-- **Status:** `PENDING`
+- **Status:** `DONE`
 - **Change Boundary Contract:**
   - **Primary Affected Files:** `src/components/PreviewPane.tsx`, `src/components/WarningList.tsx`, `src/App.tsx`
-  - **Justified Supporting Files:** None
+  - **Justified Supporting Files:** `src/hooks/useFileProcessor.ts` (expose `ExtractionWarning[]`, bukan hitungan saja), `tests/unit/PreviewPane.test.tsx`, `tests/unit/WarningList.test.tsx`
 - **Dependencies:** `TASK-007`
 - **Pre-Conditions & Skills:**
   - Baca `RULES.md` §7.2 (error messaging), PRD FR8 ilustrasi.
 - **Acceptance Criteria & Traceability:**
-  - [ ] `AC-01`: Markdown hasil tampil di preview (pre-wrap, monospace). → test
-  - [ ] `AC-02`: Ringkasan peringatan tampil ("N peringatan") + daftar per slide. → test
-  - [ ] `AC-03`: 0 warning → area warning tidak tampil. → test
+  - [x] `AC-01`: Markdown hasil tampil di preview (pre-wrap, monospace). → test
+  - [x] `AC-02`: Ringkasan peringatan tampil ("N peringatan") + daftar per slide. → test
+  - [x] `AC-03`: 0 warning → area warning tidak tampil. → test
 - **Implementation & TDD Steps:**
-  1. [ ] RED: 3 test.
-  2. [ ] GREEN: implement.
-  3. [ ] REFACTOR.
+  1. [x] RED: 3 test.
+  2. [x] GREEN: implement.
+  3. [x] REFACTOR.
 - **Verification Gates (Deterministic Proof):**
   - **Command:** `npm test && npm run lint && npm run typecheck`
-  - **Evidence:** exit 0.
+  - **Evidence:** `npm test` (44 passed), lint, typecheck, build exit 0.
 - **Containment Audit (Pre-Done Gate):**
-  - [ ] Mutasi terisolasi.
+  - [x] Mutasi terisolasi.
 
 #### [ ] `TASK-009`: Copy & Download (.md)
 

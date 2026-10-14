@@ -1,4 +1,6 @@
 import { FileUpload } from './components/FileUpload';
+import { PreviewPane } from './components/PreviewPane';
+import { WarningList } from './components/WarningList';
 import { useFileProcessor } from './hooks/useFileProcessor';
 
 export default function App() {
@@ -17,13 +19,16 @@ export default function App() {
           isProcessing={processor.status === 'processing'}
           error={processor.error}
         />
+        {processor.status === 'processing' && (
+          <p className="text-sm text-gray-600" role="status">
+            Memproses file, mohon tunggu.
+          </p>
+        )}
         {processor.status === 'success' && processor.markdown && (
-          <section className="w-full" aria-label="Markdown hasil konversi">
-            <h2 className="mb-2 text-lg font-medium">Hasil Markdown</h2>
-            <pre className="max-h-[32rem] overflow-auto rounded-lg border border-gray-200 bg-white p-4 text-sm whitespace-pre-wrap">
-              {processor.markdown}
-            </pre>
-          </section>
+          <>
+            <PreviewPane markdown={processor.markdown} />
+            <WarningList warnings={processor.warnings} />
+          </>
         )}
       </section>
     </main>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { validateFile } from '../lib/validator/file-validator';
 import { parsePptx } from '../lib/parser/pptx-adapter';
 import { renderToMarkdown } from '../lib/renderer/markdown-renderer';
+import type { ExtractionWarning } from '../lib/parser/types';
 
 type Status = 'idle' | 'processing' | 'success' | 'error';
 
@@ -9,13 +10,15 @@ interface ProcessorState {
   status: Status;
   markdown: string | null;
   error: string | null;
-  warnings: number;
+  warnings: ExtractionWarning[];
 }
 
 interface UseFileProcessorReturn extends ProcessorState {
   processFile: (file: File) => Promise<void>;
   reset: () => void;
 }
+
+const IDLE_STATE: ProcessorState = { status: 'idle', markdown: null, error: null, warnings: [] };
 
 const ERROR_MESSAGES: Record<string, string> = {
   INVALID_TYPE: 'Hanya file berekstensi .pptx yang didukung.',
@@ -29,15 +32,10 @@ const ERROR_MESSAGES: Record<string, string> = {
  * Hook for processing PPTX files through validation → parse → render pipeline.
  */
 export function useFileProcessor(): UseFileProcessorReturn {
-  const [state, setState] = useState<ProcessorState>({
-    status: 'idle',
-    markdown: null,
-    error: null,
-    warnings: 0,
-  });
+  const [state, setState] = useState<ProcessorState>(IDLE_STATE);
 
   const processFile = async (file: File): Promise<void> => {
-    setState({ status: 'processing', markdown: null, error: null, warnings: 0 });
+    setState({ status: 'processing', markdown: null, error: null, warnings: [] });
 
     const validationResult = validateFile(file);
     if (!validationResult.success) {
@@ -45,7 +43,7 @@ export function useFileProcessor(): UseFileProcessorReturn {
         status: 'error',
         markdown: null,
         error: ERROR_MESSAGES[validationResult.error.code] ?? validationResult.error.message,
-        warnings: 0,
+        warnings: [],
       });
       return;
     }
@@ -56,24 +54,24 @@ export function useFileProcessor(): UseFileProcessorReturn {
         status: 'error',
         markdown: null,
         error: ERROR_MESSAGES[parseResult.error.code] ?? parseResult.error.message,
-        warnings: 0,
+        warnings: [],
       });
       return;
     }
 
     const markdown = renderToMarkdown(parseResult.data);
-    const warningCount = parseResult.data.slides.reduce((sum, slide) => sum + slide.warnings.length, 0);
+    const warnings = parseResult.data.slides.flatMap((slide) => slide.warnings);
 
     setState({
       status: 'success',
       markdown,
       error: null,
-      warnings: warningCount,
+      warnings,
     });
   };
 
   const reset = (): void => {
-    setState({ status: 'idle', markdown: null, error: null, warnings: 0 });
+    setState(IDLE_STATE);
   };
 
   return { ...state, processFile, reset };
