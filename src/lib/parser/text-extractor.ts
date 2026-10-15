@@ -38,7 +38,7 @@ export function extractSlide(
   slideNumberValue: number,
   namespaces: Namespaces = DEFAULT_NAMESPACES,
 ): SlideModel {
-  const title = extractTitle(document, namespaces);
+  let title = extractTitle(document, namespaces);
   const content: ContentElement[] = [];
 
   // Extract tables first
@@ -59,6 +59,13 @@ export function extractSlide(
     const hasBullet = pPr !== undefined && elements(pPr, namespaces.a, 'buChar').length === 1;
     const marL = Number(pPr?.getAttribute('marL') ?? 0);
     const level = hasBullet ? Math.max(0, Math.round(marL / 342900)) : 0;
+
+    // Fallback: jika tidak ada placeholder title, pakai paragraf non-bullet pertama sebagai title
+    if (!title && !hasBullet && paragraphs.length > 1) {
+      title = text;
+      continue;
+    }
+
     content.push(hasBullet ? { type: 'bullet', level, text } : { type: 'paragraph', text });
   }
 

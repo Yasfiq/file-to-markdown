@@ -28,6 +28,21 @@ describe('extractTitle — AC-04 title placeholder', () => {
 });
 
 describe('extractSlide — AC-02/AC-03 content extraction', () => {
+  it('uses first paragraph as title fallback if no title placeholder', () => {
+    const doc = parse(
+      slideXml(
+        bodyShape(
+          paragraph('Judul Fallback Paragraf', { bullet: false }) +
+            paragraph('Konten body lainnya', { bullet: true, marL: 0 })
+        )
+      )
+    );
+    const slide = extractSlide(doc, 1);
+
+    expect(slide.title).toBe('Judul Fallback Paragraf');
+    expect(slide.content).toHaveLength(1);
+    expect(slide.content[0]).toEqual({ type: 'bullet', level: 0, text: 'Konten body lainnya' });
+  });
   it('merges multi-run <a:r> within one <a:p> into a single text', () => {
     const doc = parse(slideXml(bodyShape(multiRunParagraph(['Hi ', 'there']))));
     const slide = extractSlide(doc, 1);
